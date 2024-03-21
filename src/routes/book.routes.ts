@@ -5,7 +5,7 @@ import { authorization } from '../middleware/authorization';
 
 const Router = express.Router();
 
-Router.get('/books', authentification, BookController.getAllBook);
+Router.get('/books', BookController.getAllBook);
 Router.post('/books', authentification, BookController.createBook);
 
 // Router.put(
@@ -15,7 +15,7 @@ Router.post('/books', authentification, BookController.createBook);
 //   MovieController.updateMovie
 // );
 Router.delete(
-  '/movies/:id',
+  '/books/:id',
   authentification,
   authorization(['admin']),
   BookController.deleteBook

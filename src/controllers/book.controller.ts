@@ -16,6 +16,7 @@ export class BookController {
       const movieRepository = AppDataSource.getRepository(Book);
       const books = await movieRepository.find();
       cache.put('data', books, 10000);
+
       return res.status(200).json({
         data: books,
       });

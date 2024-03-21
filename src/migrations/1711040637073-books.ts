@@ -1,53 +1,49 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class Users1711040524766 implements MigrationInterface {
+export class Books1711040637073 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // this part you will add your self
-    // await queryRunner.query(
-    //   `
-    //       --Table Definition
-    //       CREATE TABLE "users"  (
-    //         "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
-    //         "name" character varying NOT NULL,
-    //         "email" character varying NOT NULL,
-    //         "password" character varying NOT NULL,
-    //         "role"  character varying NOT NULL DEFAULT 'user',
+    // await queryRunner.query(`
+    //     --Table Definition
+    //     CREATE TABLE "books"  (
+    //         "book_id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+    //         "title" character varying NOT NULL,
+    //         "cover" character varying NOT NULL,
+    //         "point" numeric varying NOT NULL,
+    //         "writer_id" character varying NOT NULL,
     //         "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
     //         "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
-    //         CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id")
+    //         CONSTRAINT "PK_1031171c13130102495201e3e20" PRIMARY KEY ("book_id")
     //       )
-    //     `
-    // ),
+    //       `),
     //   undefined;
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'books',
         columns: [
           {
-            name: 'id',
+            name: 'book_id',
             type: 'uuid',
             isPrimary: true,
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
+            name: 'title',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'email',
+            name: 'cover',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'password',
-            type: 'varchar',
+            name: 'point',
+            type: 'numeric',
             isNullable: false,
           },
           {
-            name: 'role',
+            name: 'writer_id',
             type: 'varchar',
-            default: "'user'",
             isNullable: false,
           },
           {
@@ -66,8 +62,7 @@ export class Users1711040524766 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // and this part
-    // await queryRunner.query(`DROP TABLE "users"`, undefined);
-    await queryRunner.dropTable('users', true, true, true);
+    // await queryRunner.query(`DROP TABLE "books"`, undefined);
+    await queryRunner.dropTable('books', true, true, true);
   }
 }

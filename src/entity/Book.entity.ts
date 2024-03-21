@@ -15,7 +15,7 @@ export class Book {
   title: string;
 
   @Column({ nullable: false })
-  cover: number;
+  cover: string;
 
   @Column({ nullable: false })
   point: number;

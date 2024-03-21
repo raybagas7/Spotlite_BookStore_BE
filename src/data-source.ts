@@ -22,6 +22,6 @@ export const AppDataSource = new DataSource({
   //logging logs sql command on the treminal
   logging: NODE_ENV === 'dev' ? false : false,
   entities: [User, Book],
-  migrations: [__dirname + '/migration/*.ts'],
+  migrations: [__dirname + '/migrations/*.ts'],
   subscribers: [],
 });
