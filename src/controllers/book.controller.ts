@@ -8,7 +8,7 @@ export class BookController {
   static async getBookPaginated(req: Request, res: Response) {
     try {
       const page = parseInt(req.query.page as string) || 1;
-      const size = parseInt(req.query.pageSize as string) || 4;
+      const size = parseInt(req.query.size as string) || 4;
       const bookService = new BookRepository(new BookService());
       const books = await bookService.findPaginated(page, size);
 

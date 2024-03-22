@@ -18,6 +18,7 @@ export class BookService implements BookRepositoryInterface {
       console.log('serving from db');
       const bookRepository = AppDataSource.getRepository(Book);
       const books = await bookRepository.find({ skip: offset, take: size });
+
       cache.put(`data_${page}`, books, 10000);
       return books;
     }

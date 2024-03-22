@@ -13,9 +13,11 @@ export class OrderController {
         req.headers.authorization.split(' ')[1],
         process.env.JWT_SECRET
       ) as JwtPayload;
+      const page = parseInt(req.query.page as string) || 1;
+      const size = parseInt(req.query.size as string) || 2;
       const user_id = decoded.id;
       const orderService = new OrderRepository(new OrderService());
-      const orders = await orderService.findUserOrder(user_id);
+      const orders = await orderService.findUserOrder(user_id, page, size);
 
       return res.status(200).json({
         data: orders,

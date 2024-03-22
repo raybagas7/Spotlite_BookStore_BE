@@ -16,7 +16,7 @@ export interface BookInterface {
 }
 
 export interface BookRepositoryInterface {
-  findPaginated(page: number, size: number): Promise<BookInterface[]>;
+  findPaginated(page: number, size: number): Promise<Book[]>;
   create(book: BookPayload, user_id: string): Promise<Book>;
   addTagsToBook(book_id: string, tagIds: string[]): Promise<void>;
   delete(book_id: string): Promise<BookInterface>;

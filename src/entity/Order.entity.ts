@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Book } from './Book.entity';
+import { User } from './User.entity';
 
 @Entity({ name: 'orders' })
 export class Order {
@@ -16,4 +24,12 @@ export class Order {
 
   @Column({ nullable: false })
   point: number;
+
+  @ManyToOne(() => Book, (book) => book.orders)
+  @JoinColumn({ name: 'book_id' })
+  book: Book;
+
+  @ManyToOne(() => User, (user) => user.writerOrders)
+  @JoinColumn({ name: 'writer_id', referencedColumnName: 'id' })
+  writer: User;
 }
