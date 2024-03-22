@@ -24,22 +24,22 @@ export class UserController {
       return res.status(500).json({ error: error.message });
     }
   }
-  // static async getUsers(req: Request, res: Response) {
-  //   const data = cache.get('data');
-  //   if (data) {
-  //     console.log('serving from cache');
-  //     return res.status(200).json({
-  //       data,
-  //     });
-  //   } else {
-  //     console.log('serving from db');
-  //     const userRepository = AppDataSource.getRepository(User);
-  //     const users = await userRepository.find();
+  static async getUsers(req: Request, res: Response) {
+    const data = cache.get('data');
+    if (data) {
+      console.log('serving from cache');
+      return res.status(200).json({
+        data,
+      });
+    } else {
+      console.log('serving from db');
+      const userRepository = AppDataSource.getRepository(User);
+      const users = await userRepository.find();
 
-  //     cache.put('data', users, 6000);
-  //     return res.status(200).json({
-  //       data: users,
-  //     });
-  //   }
-  // }
+      cache.put('data', users, 6000);
+      return res.status(200).json({
+        data: users,
+      });
+    }
+  }
 }
