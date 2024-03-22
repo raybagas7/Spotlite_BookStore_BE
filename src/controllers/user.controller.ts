@@ -3,7 +3,6 @@ import { AppDataSource } from '../data-source';
 import { User } from '../entity/User.entity';
 import { encrypt } from '../helpers/encrypt';
 import * as cache from 'memory-cache';
-import { validationResult } from 'express-validator';
 
 export class UserController {
   static async signup(req: Request, res: Response) {

@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import * as cache from 'memory-cache';
 import { AppDataSource } from '../data-source';
 import { Book } from '../entity/Book.entity';
 import { BookService } from '../services/book.service';
@@ -41,13 +40,16 @@ export class BookController {
   }
 
   static async deleteBook(req: Request, res: Response) {
-    const { book_id } = req.params;
-    const bookRepository = AppDataSource.getRepository(Book);
-    const book = await bookRepository.findOne({
-      where: { book_id },
-    });
-    await bookRepository.remove(book);
-    return res.status(200).json({ message: 'Book deleted successfully', book });
+    try {
+      const { book_id } = req.params;
+      const bookService = new BookRepository(new BookService());
+      const book = await bookService.delete(book_id);
+      return res.status(200).json({
+        data: book,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }
 

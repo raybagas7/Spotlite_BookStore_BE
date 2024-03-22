@@ -37,7 +37,12 @@ export class BookService implements BookRepositoryInterface {
 
   async delete(book_id: string) {
     try {
-      return 'a';
+      const bookRepository = AppDataSource.getRepository(Book);
+      const book = await bookRepository.findOne({
+        where: { book_id },
+      });
+      const res = await bookRepository.remove(book);
+      return res;
     } catch (error) {
       return error;
     }

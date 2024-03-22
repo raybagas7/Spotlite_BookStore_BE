@@ -23,7 +23,7 @@ Router.post(
 //   MovieController.updateMovie
 // );
 Router.delete(
-  '/books/:id',
+  '/books/:book_id',
   authentification,
   authorization(['admin']),
   BookController.deleteBook
