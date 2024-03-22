@@ -10,6 +10,4 @@ export interface BookTagInterface {
 
 export interface BookTagRepositoryInterface {
   create(bookTag: BookTagInterface): Promise<BookTagInterface[]>;
-  // findAll(): Promise<TagInterface[]>;
-  //   delete(tag_id: string): Promise<TagInterface>;
 }
