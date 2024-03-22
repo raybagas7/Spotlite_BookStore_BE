@@ -1,5 +1,4 @@
 import { Book } from '../entity/Book.entity';
-import { BookTag } from '../entity/BookTag.entity';
 
 export interface BookPayload {
   title: string;
@@ -19,7 +18,7 @@ export interface BookInterface {
 export interface BookRepositoryInterface {
   findPaginated(page: number, size: number): Promise<BookInterface[]>;
   create(book: BookPayload, user_id: string): Promise<Book>;
-  addTagsToBook(bookId: string, tagIds: string[]): Promise<void>;
+  addTagsToBook(book_id: string, tagIds: string[]): Promise<void>;
   delete(book_id: string): Promise<BookInterface>;
   findById(book_id: string): Promise<BookInterface | null>;
 }

@@ -49,11 +49,11 @@ export class BookService implements BookRepositoryInterface {
     }
   }
 
-  async addTagsToBook(bookId: string, tagIds: string[]): Promise<void> {
+  async addTagsToBook(book_id: string, tagIds: string[]): Promise<void> {
     const bookTagRepository = AppDataSource.getRepository(BookTag);
     const promises = tagIds.map(async (tagId) => {
       const bookTag = new BookTag();
-      bookTag.book_id = bookId;
+      bookTag.book_id = book_id;
       bookTag.tag_id = tagId;
       return bookTagRepository.save(bookTag);
     });
