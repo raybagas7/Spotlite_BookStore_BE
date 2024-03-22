@@ -52,24 +52,3 @@ export class BookController {
     }
   }
 }
-
-//   static async updateBook(req: Request, res: Response) {
-//     const { id } = req.params;
-//     const { title, description, director, year, rating, image, cast } =
-//       req.body;
-//     const movieRepository = AppDataSource.getRepository(Book);
-//     const movie = await movieRepository.findOne({
-//       where: { id },
-//     });
-//     movie.title = title;
-//     movie.description = description;
-//     movie.director = director;
-//     movie.year = year;
-//     movie.rating = rating;
-//     movie.image = image;
-//     movie.cast = cast;
-//     await movieRepository.save(movie);
-//     return res
-//       .status(200)
-//       .json({ message: 'Movie updated successfully', movie });
-//   }

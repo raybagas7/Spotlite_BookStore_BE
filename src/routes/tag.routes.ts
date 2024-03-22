@@ -20,4 +20,4 @@ Router.delete(
   authorization(['admin']),
   TagController.deleteTag
 );
-export { Router as bookRouter };
+export { Router as tagRouter };

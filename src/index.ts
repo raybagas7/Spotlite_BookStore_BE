@@ -6,6 +6,7 @@ import { userRouter } from './routes/user.routes';
 import { bookRouter } from './routes/book.routes';
 import { errorHandler } from './middleware/error.middleware';
 import 'reflect-metadata';
+import { tagRouter } from './routes/tag.routes';
 dotenv.config();
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(errorHandler);
 const { PORT = 3000 } = process.env;
 app.use('/auth', userRouter);
 app.use('/api', bookRouter);
+app.use('/api', tagRouter);
 
 app.get('*', (req: Request, res: Response) => {
   res.status(505).json({ message: 'Bad Request' });

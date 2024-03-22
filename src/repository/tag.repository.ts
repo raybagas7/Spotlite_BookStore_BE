@@ -9,7 +9,7 @@ export class TagRepository {
     return await this.tagRepository.findAll();
   }
 
-  async create(tag: TagPayload, user_id: string) {
+  async create(tag: TagPayload) {
     return await this.tagRepository.create(tag);
   }
 
