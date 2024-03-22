@@ -5,6 +5,7 @@ import { authorization } from '../middleware/authorization';
 import { AuthController } from '../controllers/auth.controller';
 import { check } from 'express-validator';
 import { validate } from '../middleware/validate.middleware';
+import { signupValidator } from '../validator/user.validation';
 const Router = express.Router();
 
 Router.get(
@@ -19,17 +20,7 @@ Router.get(
   authorization(['user', 'admin']),
   AuthController.getProfile
 );
-Router.post(
-  '/signup',
-  [
-    check('name').isString().notEmpty(),
-    check('email').isEmail().notEmpty(),
-    check('password').isString().notEmpty(),
-    check('role').isString().optional(),
-  ],
-  validate,
-  UserController.signup
-);
+Router.post('/signup', signupValidator, validate, UserController.signup);
 Router.post(
   '/login',
   [
