@@ -5,7 +5,7 @@ import { authorization } from '../middleware/authorization';
 
 const Router = express.Router();
 
-Router.get('/books', BookController.getAllBook);
+Router.get('/books', BookController.getBookPaginated);
 Router.post('/books', authentification, BookController.createBook);
 
 // Router.put(
