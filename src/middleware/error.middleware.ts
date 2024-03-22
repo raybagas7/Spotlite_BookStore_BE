@@ -7,12 +7,12 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if (error instanceof QueryFailedError) {
-    console.log(error);
+  // if (error instanceof QueryFailedError) {
+  //   console.log(error);
 
-    // Handle QueryFailedError (duplicate key violation)
-    return res.status(400).json({ message: 'Email already exists' });
-  }
+  //   // Handle QueryFailedError (duplicate key violation)
+  //   return res.status(400).json({ message: 'Email already exists' });
+  // }
   console.error(`Error: ${error.message}`);
   return res.status(500).json({ message: 'Internal server error' });
 };

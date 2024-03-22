@@ -2,7 +2,6 @@ export interface BookPayload {
   title: string;
   cover: string;
   point: number;
-  writer_id: string;
 }
 export interface BookInterface {
   book_id: string;

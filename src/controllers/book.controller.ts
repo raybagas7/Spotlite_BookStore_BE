@@ -38,15 +38,6 @@ export class BookController {
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
-    // const { title, cover, point, writer_id } = req.body;
-    // const book = new Book();
-    // book.title = title;
-    // book.cover = cover;
-    // book.point = point;
-    // book.writer_id = writer_id;
-    // const bookRepository = AppDataSource.getRepository(Book);
-    // await bookRepository.save(book);
-    // return res.status(200).json({ message: 'Book created successfully', book });
   }
 
   static async deleteBook(req: Request, res: Response) {

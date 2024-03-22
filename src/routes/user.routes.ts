@@ -3,9 +3,8 @@ import { authentification } from '../middleware/auth.middleware';
 import { UserController } from '../controllers/user.controller';
 import { authorization } from '../middleware/authorization';
 import { AuthController } from '../controllers/auth.controller';
-import { check } from 'express-validator';
 import { validate } from '../middleware/validate.middleware';
-import { signupValidator } from '../validator/user.validation';
+import { loginValidator, signupValidator } from '../validator/user.validation';
 const Router = express.Router();
 
 Router.get(
@@ -21,14 +20,7 @@ Router.get(
   AuthController.getProfile
 );
 Router.post('/signup', signupValidator, validate, UserController.signup);
-Router.post(
-  '/login',
-  [
-    check('email').isEmail().notEmpty(),
-    check('password').isString().notEmpty(),
-  ],
-  AuthController.login
-);
+Router.post('/login', loginValidator, AuthController.login);
 Router.put(
   '/update/:id',
   authentification,
