@@ -3,11 +3,26 @@ import { JwtPayload } from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
 import { OrderRepository } from '../repository/order.repository';
 import { OrderService } from '../services/order.service';
+import { UserRepository } from '../repository/user.repository';
+import { UserService } from '../services/user.service';
 
 export class OrderController {
   static async getUserOrder(req: Request, res: Response) {
     try {
-    } catch (error) {}
+      const decoded = jwt.verify(
+        req.headers.authorization.split(' ')[1],
+        process.env.JWT_SECRET
+      ) as JwtPayload;
+      const user_id = decoded.id;
+      const orderService = new OrderRepository(new OrderService());
+      const orders = await orderService.findUserOrder(user_id);
+
+      return res.status(200).json({
+        data: orders,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 
   static async createOrder(req: Request, res: Response) {
@@ -16,8 +31,11 @@ export class OrderController {
         req.headers.authorization.split(' ')[1],
         process.env.JWT_SECRET
       ) as JwtPayload;
-
       const customer_id = decoded.id;
+      const { point } = req.body;
+
+      const userService = new UserRepository(new UserService());
+      await userService.subtractUserPoint(point, customer_id);
 
       const orderService = new OrderRepository(new OrderService());
       const order = await orderService.create(req.body, customer_id);
@@ -26,7 +44,9 @@ export class OrderController {
         data: order,
         message: 'Order Created!',
       });
-    } catch (error) {}
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 
   static async deleteOrder(req: Request, res: Response) {

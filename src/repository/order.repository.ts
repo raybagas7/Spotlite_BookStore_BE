@@ -6,8 +6,8 @@ import {
 export class OrderRepository {
   constructor(private orderRepository: OrderRepositoryInterface) {}
 
-  async findUserOrder() {
-    return await this.orderRepository.findUserOrder();
+  async findUserOrder(user_id: string) {
+    return await this.orderRepository.findUserOrder(user_id);
   }
 
   async create(order: OrderPayload, customer_id: string) {
