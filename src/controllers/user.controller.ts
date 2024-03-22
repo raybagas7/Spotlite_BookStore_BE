@@ -13,6 +13,7 @@ export class UserController {
     user.email = email;
     user.password = encryptedPassword;
     user.role = role;
+    user.point = 100;
 
     const userRepository = AppDataSource.getRepository(User);
     await userRepository.save(user);

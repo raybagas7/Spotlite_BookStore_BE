@@ -13,6 +13,7 @@ Router.post(
   authentification,
   createBookValidator,
   validate,
+  authorization(['admin']),
   BookController.createBook
 );
 

@@ -35,6 +35,12 @@ export class Users1711040524766 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'point',
+            type: 'numeric',
+            default: 100,
+            isNullable: false,
+          },
+          {
             name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
