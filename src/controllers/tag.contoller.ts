@@ -17,11 +17,27 @@ export class TagController {
 
   static async createTag(req: Request, res: Response) {
     try {
-    } catch (error) {}
+      const tagService = new TagRepository(new TagService());
+      const tag = await tagService.create(req.body);
+      return res.status(200).json({
+        data: tag,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 
   static async deleteTag(req: Request, res: Response) {
     try {
-    } catch (error) {}
+      const { tag_id } = req.params;
+      const tagService = new TagRepository(new TagService());
+      const tag = await tagService.delete(tag_id);
+      return res.status(200).json({
+        data: tag,
+        message: `tag ${tag.name} has been deleted`,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }

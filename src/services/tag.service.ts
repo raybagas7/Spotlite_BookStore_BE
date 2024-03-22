@@ -23,17 +23,24 @@ export class TagService implements TagRepositoryInterface {
     return tags;
   }
 
-  async create(book: TagPayload) {
-    try {
-      return 'a';
-    } catch (error) {
-      return error;
-    }
+  async create(tag: TagPayload) {
+    const { name } = tag;
+    const tagData = new Tag();
+    tagData.name = name;
+
+    const tagRepository = AppDataSource.getRepository(Tag);
+    const data = await tagRepository.save(tagData);
+    return data;
   }
 
   async delete(tag_id: string) {
     try {
-      return 'a';
+      const tagRepository = AppDataSource.getRepository(Tag);
+      const tag = await tagRepository.findOne({
+        where: { tag_id },
+      });
+      const res = await tagRepository.remove(tag);
+      return res;
     } catch (error) {
       return error;
     }

@@ -9,6 +9,6 @@ export interface TagInterface {
 
 export interface TagRepositoryInterface {
   findAll(): Promise<TagInterface[]>;
-  create(book: TagPayload): Promise<TagPayload>;
+  create(tag: TagPayload): Promise<TagPayload>;
   delete(tag_id: string): Promise<TagInterface>;
 }

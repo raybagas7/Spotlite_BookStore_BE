@@ -16,13 +16,6 @@ Router.post(
   authorization(['admin']),
   BookController.createBook
 );
-
-// Router.put(
-//   '/movies/:id',
-//   authentification,
-//   authorization(['admin']),
-//   MovieController.updateMovie
-// );
 Router.delete(
   '/books/:book_id',
   authentification,

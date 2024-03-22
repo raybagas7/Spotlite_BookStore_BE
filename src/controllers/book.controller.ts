@@ -46,6 +46,7 @@ export class BookController {
       const book = await bookService.delete(book_id);
       return res.status(200).json({
         data: book,
+        message: `book ${book.title} has been deleted`,
       });
     } catch (error) {
       return res.status(500).json({ error: error.message });
