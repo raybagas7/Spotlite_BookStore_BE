@@ -1,4 +1,4 @@
-import { User } from "../entity/User.entity";
+import { User } from '../entity/User.entity';
 
 export interface SignupPayload {
   name: string;
@@ -24,4 +24,5 @@ export interface UserInterface {
 
 export interface UserRepositoryInterface {
   signup(userData: SignupPayload): Promise<User>;
+  subtractUserPoint(point: number, userId: string): Promise<void>;
 }

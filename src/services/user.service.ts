@@ -21,6 +21,22 @@ export class UserService implements UserRepositoryInterface {
     const userRepository = AppDataSource.getRepository(User);
     await userRepository.save(user);
 
-    return user
+    return user;
+  }
+
+  async subtractUserPoint(point: number, userId: string) {
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    if (user.point < point) {
+      throw new Error('Insufficient points');
+    }
+
+    user.point -= point;
+    await userRepository.save(user);
   }
 }
