@@ -5,6 +5,7 @@ import {
   BookPayload,
   BookRepositoryInterface,
 } from '../interfaces/book.interface';
+import { BookTag } from '../entity/BookTag.entity';
 
 export class BookService implements BookRepositoryInterface {
   async findPaginated(page: number = 1, size: number = 4) {
@@ -46,6 +47,17 @@ export class BookService implements BookRepositoryInterface {
     } catch (error) {
       return error;
     }
+  }
+
+  async addTagsToBook(bookId: string, tagIds: string[]): Promise<void> {
+    const bookTagRepository = AppDataSource.getRepository(BookTag);
+    const promises = tagIds.map(async (tagId) => {
+      const bookTag = new BookTag();
+      bookTag.book_id = bookId;
+      bookTag.tag_id = tagId;
+      return bookTagRepository.save(bookTag);
+    });
+    await Promise.all(promises);
   }
 
   async findById(book_id: string) {

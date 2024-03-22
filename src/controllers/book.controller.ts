@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
-import { Book } from '../entity/Book.entity';
 import { BookService } from '../services/book.service';
 import { BookRepository } from '../repository/book.repository';
 import * as jwt from 'jsonwebtoken';
@@ -13,6 +11,7 @@ export class BookController {
       const size = parseInt(req.query.pageSize as string) || 4;
       const bookService = new BookRepository(new BookService());
       const books = await bookService.findPaginated(page, size);
+
       return res.status(200).json({
         data: books,
       });
@@ -20,6 +19,7 @@ export class BookController {
       return res.status(500).json({ error: error.message });
     }
   }
+
   static async createBook(req: Request, res: Response) {
     try {
       const decoded = jwt.verify(
@@ -31,6 +31,12 @@ export class BookController {
 
       const bookService = new BookRepository(new BookService());
       const book = await bookService.create(req.body, user_id);
+
+      const tags = req.body.tags;
+      if (tags && Array.isArray(tags) && tags.length > 0) {
+        await bookService.addTagsToBook(book.book_id, tags);
+      }
+
       return res.status(200).json({
         data: book,
       });

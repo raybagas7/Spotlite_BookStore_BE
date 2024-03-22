@@ -16,4 +16,7 @@ export const createBookValidator = [
     .withMessage('point is required')
     .isNumeric()
     .withMessage('point must be a number'),
+  check('tags')
+    .isArray({ min: 1 })
+    .withMessage('Tags must be an array with at least one tag'),
 ];

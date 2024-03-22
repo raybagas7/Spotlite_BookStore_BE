@@ -17,6 +17,10 @@ export class BookRepository {
     return await this.bookRepository.delete(book_id);
   }
 
+  async addTagsToBook(bookId: string, tagIds: string[]) {
+    return await this.bookRepository.addTagsToBook(bookId, tagIds);
+  }
+
   async findById(book_id: string) {
     return await this.bookRepository.findById(book_id);
   }
