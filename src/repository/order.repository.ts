@@ -10,8 +10,8 @@ export class OrderRepository {
     return await this.orderRepository.findUserOrder();
   }
 
-  async create(order: OrderPayload) {
-    return await this.orderRepository.create(order);
+  async create(order: OrderPayload, customer_id: string) {
+    return await this.orderRepository.create(order, customer_id);
   }
 
   async detele(order_id: string) {

@@ -16,6 +16,6 @@ export interface OrderInterface {
 
 export interface OrderRepositoryInterface {
   findUserOrder(): Promise<OrderInterface[]>;
-  create(order: OrderPayload): Promise<Order>;
+  create(order: OrderPayload, customer_id: string): Promise<Order>;
   delete(order_id: string): Promise<void>;
 }
