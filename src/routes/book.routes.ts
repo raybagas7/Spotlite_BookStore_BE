@@ -2,7 +2,7 @@ import * as express from 'express';
 import { authentification } from '../middleware/auth.middleware';
 import { BookController } from '../controllers/book.controller';
 import { authorization } from '../middleware/authorization';
-import { createBookValidator } from '../validator/book.validation';
+import { createBookValidator } from '../validator/book.validator';
 import { validate } from '../middleware/validate.middleware';
 
 const Router = express.Router();

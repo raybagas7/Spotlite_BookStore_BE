@@ -4,7 +4,7 @@ import { UserController } from '../controllers/user.controller';
 import { authorization } from '../middleware/authorization';
 import { AuthController } from '../controllers/auth.controller';
 import { validate } from '../middleware/validate.middleware';
-import { loginValidator, signupValidator } from '../validator/user.validation';
+import { loginValidator, signupValidator } from '../validator/user.validator';
 const Router = express.Router();
 
 Router.get(
