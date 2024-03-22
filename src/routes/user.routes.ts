@@ -21,16 +21,5 @@ Router.get(
 );
 Router.post('/signup', signupValidator, validate, UserController.signup);
 Router.post('/login', loginValidator, AuthController.login);
-Router.put(
-  '/update/:id',
-  authentification,
-  authorization(['user', 'admin']),
-  UserController.updateUser
-);
-Router.delete(
-  '/delete/:id',
-  authentification,
-  authorization(['admin']),
-  UserController.deleteUser
-);
+
 export { Router as userRouter };
