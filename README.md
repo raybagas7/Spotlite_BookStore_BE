@@ -12,6 +12,11 @@ Backend for Book Store, consisting of admin/writer and regular users.
 - Only one token, AccessToken only
 - Build on top of Express with TypeORM
 
+## Related
+
+- REST API
+  [FE NextJs/TS SpotBook Repo](https://github.com/raybagas7/Spotlite_BookStore_FE)
+
 ## Documentation
 
 - [Postman Documentation](https://documenter.getpostman.com/view/20860825/2sA35Ba3ox#1055f8c2-518e-4d66-a775-d837ba685471)
