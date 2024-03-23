@@ -8,11 +8,13 @@ import { errorHandler } from './middleware/error.middleware';
 import 'reflect-metadata';
 import { tagRouter } from './routes/tag.routes';
 import { orderRouter } from './routes/order.routes';
+import * as cors from 'cors';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(errorHandler);
+app.use(cors());
 const { PORT = 3000 } = process.env;
 app.use('/auth', userRouter);
 app.use('/api', bookRouter);

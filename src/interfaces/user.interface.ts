@@ -25,4 +25,5 @@ export interface UserInterface {
 export interface UserRepositoryInterface {
   signup(userData: SignupPayload): Promise<User>;
   subtractUserPoint(point: number, userId: string): Promise<void>;
+  checkUserAvailability(email: string): Promise<boolean>;
 }

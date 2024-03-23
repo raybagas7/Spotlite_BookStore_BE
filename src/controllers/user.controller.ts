@@ -10,6 +10,16 @@ export class UserController {
   static async signup(req: Request, res: Response) {
     try {
       const userService = new UserRepository(new UserService());
+      const userAvailability = await userService.checkUserAvailability(
+        req.body.email
+      );
+      console.log('available', userAvailability);
+      if (!userAvailability) {
+        return res
+          .status(409)
+          .json({ message: 'This email have been registered' });
+      }
+
       const user = await userService.signup(req.body);
       const token = encrypt.generateToken({ id: user.id });
 
@@ -17,10 +27,11 @@ export class UserController {
 
       return res.status(200).json({
         message: 'User created successfully',
-        token,
-        user,
+        data: { token, user },
       });
     } catch (error) {
+      console.log(error);
+
       return res.status(500).json({ error: error.message });
     }
   }

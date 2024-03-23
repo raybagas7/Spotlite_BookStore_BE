@@ -53,6 +53,12 @@ export class OrderController {
 
   static async deleteOrder(req: Request, res: Response) {
     try {
+      const { order_id } = req.params;
+      const orderService = new OrderRepository(new OrderService());
+      await orderService.detele(order_id);
+      return res.status(200).json({
+        message: 'Order has been deleted',
+      });
     } catch (error) {}
   }
 }

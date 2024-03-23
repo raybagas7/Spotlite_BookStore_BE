@@ -24,6 +24,17 @@ export class UserService implements UserRepositoryInterface {
     return user;
   }
 
+  async checkUserAvailability(email: string) {
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({ where: { email: email } });
+    console.log(user);
+
+    if (user) {
+      return false;
+    }
+    return true;
+  }
+
   async subtractUserPoint(point: number, userId: string) {
     const userRepository = AppDataSource.getRepository(User);
     const user = await userRepository.findOne({ where: { id: userId } });

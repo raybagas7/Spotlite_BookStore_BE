@@ -49,10 +49,10 @@ export class OrderService implements OrderRepositoryInterface {
   }
 
   async delete(order_id: string) {
-    try {
-      return 'a';
-    } catch (error) {
-      return error;
-    }
+    const orderRepository = AppDataSource.getRepository(Order);
+    const order = await orderRepository.findOne({
+      where: { order_id },
+    });
+    await orderRepository.remove(order);
   }
 }
