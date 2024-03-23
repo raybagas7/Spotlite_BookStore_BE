@@ -13,6 +13,10 @@ export class UserRepository {
     return await this.userRepository.subtractUserPoint(point, userId);
   }
 
+  async incrementUserPoint(point: number, userId: string) {
+    return await this.userRepository.incrementUserPoint(point, userId);
+  }
+
   async checkUserAvailability(email: string) {
     return await this.userRepository.checkUserAvailability(email);
   }

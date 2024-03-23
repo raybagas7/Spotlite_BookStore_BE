@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Order } from './Order.entity';
+import { BookTag } from './BookTag.entity';
 
 @Entity({ name: 'books' })
 export class Book {
@@ -27,6 +28,9 @@ export class Book {
 
   @OneToMany(() => Order, (order) => order.book)
   orders: Order[];
+
+  @OneToMany(() => BookTag, (bookTag) => bookTag.book)
+  bookTags: BookTag[];
 
   @CreateDateColumn()
   createdAt: Date;

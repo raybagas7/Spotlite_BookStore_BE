@@ -50,4 +50,16 @@ export class UserService implements UserRepositoryInterface {
     user.point -= point;
     await userRepository.save(user);
   }
+
+  async incrementUserPoint(point: number, userId: string) {
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    user.point += point;
+    await userRepository.save(user);
+  }
 }

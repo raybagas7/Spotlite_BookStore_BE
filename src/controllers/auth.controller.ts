@@ -18,11 +18,17 @@ export class AuthController {
 
       const isPasswordValid = encrypt.comparepassword(user.password, password);
       if (!user || !isPasswordValid) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({
+          message:
+            'Authentication failed. Please check your credentials and try again.',
+        });
       }
       const token = encrypt.generateToken({ id: user.id });
 
-      return res.status(200).json({ message: 'Login successful', user, token });
+      return res.status(200).json({
+        message: 'Login successful',
+        data: { user: { ...user, password: undefined }, token },
+      });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });
@@ -37,6 +43,6 @@ export class AuthController {
     const user = await userRepository.findOne({
       where: { id: req[' currentUser'].id },
     });
-    return res.status(200).json({ ...user, password: undefined });
+    return res.status(200).json({ data: { ...user, password: undefined } });
   }
 }

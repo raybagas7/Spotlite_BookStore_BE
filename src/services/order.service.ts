@@ -1,5 +1,6 @@
 import { AppDataSource } from '../data-source';
 import { Order } from '../entity/Order.entity';
+import { User } from '../entity/User.entity';
 import {
   OrderPayload,
   OrderRepositoryInterface,
@@ -49,10 +50,22 @@ export class OrderService implements OrderRepositoryInterface {
   }
 
   async delete(order_id: string) {
+    const userRepository = AppDataSource.getRepository(User);
     const orderRepository = AppDataSource.getRepository(Order);
     const order = await orderRepository.findOne({
       where: { order_id },
     });
+
+    const user = await userRepository.findOne({
+      where: { id: order.customer_id },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    user.point += order.point;
+    await userRepository.save(user);
     await orderRepository.remove(order);
   }
 }
